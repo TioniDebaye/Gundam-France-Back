@@ -1,0 +1,138 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(40, 40, 40);
+}
+header {
+    display: flex;
+    position: relative;
+    background-color: rgb(20, 20, 20);
+    border-top: 2px solid goldenrod;
+    border-bottom: 2px solid goldenrod;
+    height: 80px;
+    width: 100%;
+    align-items: center;
+}
+h1 {
+    position: absolute;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 15px;
+    background-color: goldenrod;
+    border-radius: 20px;
+    margin-left: 15px;
+    max-width: 45%;
+    max-height: 80px;
+}
+h2 {
+    color: rgb(213, 213, 213);
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+/* MENU DEROULANT */
+
+nav {
+    width: 100px;
+    max-width: 100px;
+    position: absolute;
+    right: 0;
+    padding: 10px;
+}
+nav ul {
+    list-style-type: none;
+    text-align: center;
+    width: 100%;
+    padding: 0;
+}
+nav ul li {
+    text-align: center;
+    position: relative;
+
+}
+nav ul::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+nav a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    background-color: goldenrod;
+    padding: 5px;
+    font-weight: bold;
+    border-radius: 8px;
+    border-bottom: 1px solid black;
+    margin-top: 2px;
+}
+nav:hover {
+    color: goldenrod;
+    border-bottom: 2px solid goldenrod;
+}
+.sous {
+    display: none;
+    background-color: transparent;
+    font-size: 0.8rem;
+    width: 100%;
+    z-index: 1000;
+    position: absolute;
+}
+nav > ul li:hover .sous {
+    display: block;
+    
+}
+.sous li {
+    float: none;
+    width: 100%;
+    text-align: left;
+}
+.sous a {
+    padding: 10px;
+    border-bottom: 1px solid black;
+
+}
+.sous a:hover {
+    border-bottom: none;
+    background-color: rgb(0, 0, 0);
+    color: goldenrod;
+}
+.déroulant > a::after {
+    content:icon;
+    font-size: 12px;
+}
+.menu {
+    border-radius: 20px;
+}
+
+/* gestion de l'image de présentation */
+
+.presentation {
+    text-align: center;
+}
+.presentation img {
+    margin-top: 10px;
+    width: 80%;
+    border-radius: 20px;
+    border: 1px solid goldenrod;
+}
+
+/* main */
+
+main p {
+    color:rgb(213, 213, 213) ;
+    text-align: justify;
+    margin: 0px 10px 10px 10px;
+}
+
+/* RESPONSIVE */
+
+@media (min-width: 900px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    .presentation img {
+        width: 30%;
+    }
+}
