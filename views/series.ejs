@@ -1,0 +1,15 @@
+<%- include('partials/header.ejs') %>
+
+
+<main class="container">
+    <ul>
+    <div class="serie">
+        <% for (let serie of series) { %>
+        <img src="../Public/content/img/series/<%= serie.img %>" alt="<%= serie.alt %>">
+        <h3><%= serie.title %></h3>
+        <% } %>
+    </div>
+    </ul>
+</main>
+</body>
+</html>
