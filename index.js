@@ -2,7 +2,7 @@
 
 const express = require("express");
 const app = express();
-const router = require('./router.js');
+const router = require('./app/router.js');
 const port = 3002;
 
 //j'indique les chemins des fichiers statiques et de mes vues
