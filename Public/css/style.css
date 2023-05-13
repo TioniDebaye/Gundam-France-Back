@@ -2,124 +2,139 @@ body {
     font-family: sans-serif;
     margin: 0;
     padding: 0;
-    background-color: rgb(40, 40, 40);
+
 }
-.logo {
-    background-color: goldenrod;
-    align-items: center;
-    border-radius: 20px;
-    color: black;
-}
+
+
 /* header */
 
+.header--div {
+  position: relative;
+  z-index: 1;
+  height: 60px;
+}
+
 .header {
-    background-color: #fff;
-    box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
-    position: fixed;
-    width: 100%;
-    z-index: 3;
-  }
-  
-  .header ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    overflow: hidden;
-    background-color: #fff;
-  }
-  
-  .header li a {
-    display: block;
-    padding: 20px 20px;
-    border-right: 1px solid #f4f4f4;
-    text-decoration: none;
-  }
-  
-  .header li a:hover,
-  .header .menu-btn:hover {
-    background-color: #f4f4f4;
-  }
-  
-  .header .logo {
-    display: block;
-    float: left;
-    font-size: 2em;
-    padding: 10px 20px;
-    text-decoration: none;
-  }
-  
-  /* menu */
-  
-  .header .menu {
-    clear: both;
-    max-height: 0;
-    transition: max-height .2s ease-out;
-  }
-  
-  /* menu icon */
-  
-  .header .menu-icon {
-    cursor: pointer;
-    float: right;
-    padding: 28px 20px;
-    position: relative;
-    user-select: none;
-  }
-  
-  .header .menu-icon .navicon {
-    background: #333;
-    display: block;
-    height: 2px;
-    position: relative;
-    transition: background .2s ease-out;
-    width: 18px;
-  }
-  
-  .header .menu-icon .navicon:before,
-  .header .menu-icon .navicon:after {
-    background: #333;
-    content: '';
-    display: block;
-    height: 100%;
-    position: absolute;
-    transition: all .2s ease-out;
-    width: 100%;
-  }
-  
-  .header .menu-icon .navicon:before {
-    top: 5px;
-  }
-  
-  .header .menu-icon .navicon:after {
-    top: -5px;
-  }
-  
-  /* menu btn */
-  
-  .header .menu-btn {
-    display: none;
-  }
-  
-  .header .menu-btn:checked ~ .menu {
-    max-height: 240px;
-  }
-  
-  .header .menu-btn:checked ~ .menu-icon .navicon {
-    background: transparent;
-  }
-  
-  .header .menu-btn:checked ~ .menu-icon .navicon:before {
-    transform: rotate(-45deg);
-  }
-  
-  .header .menu-btn:checked ~ .menu-icon .navicon:after {
-    transform: rotate(45deg);
-  }
-  
-  .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
-  .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
-    top: 0;
-  }
+  background-color: #fff;
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  position: fixed;
+  width: 100%;
+  min-width: 330px;
+  z-index: 3;
+  top:0;
+}
+
+.header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.header li a {
+  display: block;
+  padding: 20px 20px;
+  border-right: 1px solid #f4f4f4;
+  text-decoration: none;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+  background-color: #f4f4f4;
+}
+
+.header .logo {
+  display: block;
+  float: left;
+  font-size: 2em;
+  padding: 10px 10px;
+  text-decoration: none;
+  background-color: goldenrod;
+  align-items: center;
+  border-radius: 5px;
+  color: black;
+  border: 2px solid black;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+/* menu */
+
+.header .menu {
+  clear: both;
+  max-height: 0;
+
+  transition: max-height .2s ease-out;
+}
+
+/* menu icon */
+
+.header .menu-icon {
+  cursor: pointer;
+
+  padding: 30px 20px;
+  position: relative;
+  user-select: none;
+  float: right
+}
+
+.header .menu-icon .navicon {
+  background: #333;
+  display: block;
+  height: 2px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 18px;
+}
+
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {
+  background: #333;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+
+.header .menu-icon .navicon:before {
+  top: 5px;
+}
+
+.header .menu-icon .navicon:after {
+  top: -5px;
+}
+
+/* menu btn */
+
+.header .menu-btn {
+  display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+  max-height: 240px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
   
 
 /* gestion de l'image de présentation */
@@ -145,7 +160,61 @@ main p {
 
 
 
-/* page de série */
+/* page des séries */
+
+.serie--list {
+  padding: 5px;
+}
+
+.serie {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+}
+
+.series {
+    max-width: 100%;
+    padding-top: 10px;
+}
+
+.series img {
+    max-width: 100%;
+    min-height: 100px;
+    border-radius: 10px;
+    border: 2px solid goldenrod;
+}
+
+.series--title p {
+  color: black;
+  margin: 0;
+}
+
+.series--fiche {
+  text-align: center;
+  align-items: center;
+  height: 40px;
+  width: 200px;
+  background-color: aqua;
+}
+
+.series--fiche {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  background-color: goldenrod;
+}
+
+.series--fiche:hover {
+  background-color: black;
+  color: white;
+}
+
+.series--fiche a {
+  margin:auto;
+
+}
+
 
 /* bouton retour */
 
@@ -167,16 +236,6 @@ main p {
     color:rgb(213, 213, 213) ;
 }
 
-.serie {
-    display: flex;
-    position: relative;
-    align-items: center;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 15px;
-    gap: 10px;
-
-}
 
 .serie h3 {
     display: flex;
@@ -204,36 +263,38 @@ main p {
     color:rgb(213, 213, 213)  ;
 }
 
-.serie img {
-
-    width: 50%;
-    min-width: 50%;
-    max-height: 100px;
-    min-height: 100px;
-    border-radius: 20px;
-    border: 1px solid goldenrod;
-}
 
 /* RESPONSIVE*/
 
   
-  @media (min-width: 900px) {
-    .header li {
-      float: left;
-    }
-    .header li a {
-      padding: 20px 30px;
-    }
-    .header .menu {
-      clear: none;
-      float: right;
-      max-height: none;
-    }
-    .header .menu-icon {
-      display: none;
-    }
+  @media (min-width: 768px) {
+      .header li {
+        float: left;
+        font-size: large;
+      }
+      .header li a {
+        padding: 30px 30px;
+      }
+      .header .menu {
+        clear: none;
+        float: right;
+        max-height: none;
+      }
+
+      .header .menu-icon {
+        display: none;
+      }
     .index--image {
         max-width: 30%;
+    }
+    .series {
+      max-width: 30%;
+      min-width: 30%;
+      justify-content: space-between;
+  }
+    .serie {
+      justify-content: space-around;
+      max-width: 90%;
     }
   }
   

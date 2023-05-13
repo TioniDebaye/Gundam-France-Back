@@ -2,12 +2,19 @@
 
 
 <main class="container">
-    <ul>
+    <ul class="serie--list">
     <div class="serie">
-        <% for (let serie of series) { %>
-        <img src="../Public/content/img/series/<%= serie.img %>" alt="<%= serie.alt %>">
-        <h3><%= serie.title %></h3>
-        <a class="fiche--serie" href="/ficheserie/<%= serie.id  %>">En savoir plus sur cette série</a>
+        <% for (let serie of listOfSeries) { %>
+        <article class="series">
+            <img src="/content/img/series/<%= serie.img %>" alt="<%= serie.alt %>">
+            <div class="series--title">
+                <h4><%= serie.title %></h4> 
+                <p> <%- serie.excerpt %></p>
+                    <div class="series--fiche">
+                        <a class="fiche--serie" href="/ficheserie/<%= serie.id  %>">Lire la fiche de cette série</a>
+                    </div>
+            </div>
+        </article>
         <% } %>
     </div>
     </ul>

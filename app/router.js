@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const series = require("../data/series.json")
+const serieController = require('./controllers/serieController')
+const videoGamesController = require('./controllers/videoGamesController')
+
 
 //j'indique pour le moment une route index.ejs en page d'accueil le temps de travailler le reste du site
 router.get('/', (request, response) => {
@@ -8,29 +10,17 @@ router.get('/', (request, response) => {
 });
 
 //j'indique ici la route pour les series, je lui passe la variable series qui pointe sur mon fichier json pour boucler dessus
-router.get('/series', (request, response) => {
-    response.render('series.ejs', { 
-        series
-    });
-});
 
-router.get('/ficheserie/:serie', (request, response) => {
-    const idSerie = parseInt(request.params.serie)
+//route pour afficher la page de récapitulatif des séries
+router.get('/series', serieController.getSeries);
+//route pour affiche la page d'une série en particuliers
+router.get('/ficheserie/:serie', serieController.getFicheSerie);
 
-    const foundSerie = series.find((serie) => {
-        return serie.id === idSerie;
-    })
 
-    if (foundSerie) {
-        response.render('ficheserie.ejs', { 
-            serie: foundSerie
-        });
-    } else {
-        response.status(404).send('Série introuvable');
-    }
-
-});
-
+//route pour afficher la page des jeux vidéos
+router.get('/videogames', videoGamesController.getVideoGames );
+//route pour afficher une fiche de jeu vidéo
+router.get('/videogames/:game', );
 
 
 //j'exporte mon module routeur pour que le app.js puisse le lancer
