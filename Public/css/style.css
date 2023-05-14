@@ -50,11 +50,10 @@ body {
   font-size: 2em;
   padding: 10px 10px;
   text-decoration: none;
-  background-color: goldenrod;
+  border: 2px solid goldenrod;
   align-items: center;
   border-radius: 5px;
   color: black;
-  border: 2px solid black;
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 10px;
@@ -189,15 +188,11 @@ main p {
   margin: 0;
 }
 
-.series--fiche {
-  text-align: center;
-  align-items: center;
-  height: 40px;
-  width: 200px;
-  background-color: aqua;
-}
+
 
 .series--fiche {
+  height: 40px;
+  width: 200px;
   margin-top: 20px;
   display: flex;
   align-items: center;
