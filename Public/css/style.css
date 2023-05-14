@@ -281,9 +281,7 @@ main p {
       .header .menu-icon {
         display: none;
       }
-    .index--image {
-        max-width: 70%;
-    }
+
     .series {
       max-width: 45%;
       min-width: 45%;
@@ -297,12 +295,7 @@ main p {
   
 
   @media (min-width: 900px) {
-    .container {
-      max-width: 70%;
-      justify-content: center;
-      display: flex;
-      flex-direction: column;
-    }
+
     .header li {
       float: left;
       font-size: large;
