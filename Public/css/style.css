@@ -140,12 +140,11 @@ body {
 
 .presentation {
     text-align: center;
-    padding-top: 80px;
 }
 .index--image {
     margin-top: 10px;
     max-width: 80%;
-    border-radius: 20px;
+    border-radius: 5px;
     border: 1px solid goldenrod;
 }
 
@@ -174,6 +173,8 @@ main p {
 .series {
     max-width: 100%;
     padding-top: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .series img {
@@ -185,15 +186,17 @@ main p {
 
 .series--title p {
   color: black;
-  margin: 0;
+  margin: 0 0 20px 0;
 }
 
-
+.series--content {
+  display: flex;
+}
 
 .series--fiche {
+ margin-top: auto;
   height: 40px;
   width: 200px;
-  margin-top: 20px;
   display: flex;
   align-items: center;
   border-radius: 5px;
@@ -207,7 +210,6 @@ main p {
 
 .series--fiche a {
   margin:auto;
-
 }
 
 
@@ -280,11 +282,11 @@ main p {
         display: none;
       }
     .index--image {
-        max-width: 30%;
+        max-width: 70%;
     }
     .series {
-      max-width: 30%;
-      min-width: 30%;
+      max-width: 45%;
+      min-width: 45%;
       justify-content: space-between;
   }
     .serie {
@@ -293,3 +295,40 @@ main p {
     }
   }
   
+
+  @media (min-width: 900px) {
+    .container {
+      max-width: 70%;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+    }
+    .header li {
+      float: left;
+      font-size: large;
+    }
+    .header li a {
+      padding: 30px 30px;
+    }
+    .header .menu {
+      clear: none;
+      float: right;
+      max-height: none;
+    }
+
+    .header .menu-icon {
+      display: none;
+    }
+  .index--image {
+      max-width: 40%;
+  }
+  .series {
+    max-width: 30%;
+    min-width: 30%;
+    justify-content: space-between;
+}
+  .serie {
+    justify-content: space-around;
+    max-width: 90%;
+  }
+}
