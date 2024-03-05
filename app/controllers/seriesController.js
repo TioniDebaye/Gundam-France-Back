@@ -1,9 +1,13 @@
-
-
 const  seriesDatamapper  = require("../model/seriesDatamapper")
 
 const serieController = {
 
+    /**
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} next 
+     */
 
     async getAllSeries(req,res,next) {
 
