@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="node_modules/bulma/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="/Public/css/admin.css">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <img src="/Public/content/img/adminpage.png" >
+          </a>
+      
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item">
+              Home
+            </a>
+      
+            <a class="navbar-item">
+              Documentation
+            </a>
+      
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                More
+              </a>
+      
+              <div class="navbar-dropdown">
+                <a class="navbar-item">
+                  About
+                </a>
+                <a class="navbar-item">
+                  Jobs
+                </a>
+                <a class="navbar-item">
+                  Contact
+                </a>
+                <hr class="navbar-divider">
+                <a class="navbar-item">
+                  Report an issue
+                </a>
+              </div>
+            </div>
+          </div>
+      
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <a class="button is-primary">
+                  <strong>Sign up</strong>
+                </a>
+                <a class="button is-light">
+                  Log in
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    
+    <img class="ml-4" src="/Public/content/img/android-chrome-512x512.png" width="50px" >
+
+    <nav class="breadcrumb ml-4" aria-label="breadcrumbs">
+        <ul>
+          <li><a href="#">Création d'une série</a></li>
+          <li><a href="#">Edition d'une série</a></li>
+          <li><a href="#">Création d'une fiche JV</a></li>
+          <li><a href="#">Edition d'une fiche JV</a></li>
+
+        </ul>
+    </nav>
+
+    <p class="subtitle is-3 ml-4 label">Edition d'une série</p>
+
+    <!-- édition d'une série -->
+
+    <form class="box">
+        <div class="field">
+          <label class="label">Nom de la série</label>
+          <div class="control">
+            <input class="input " type="text" placeholder="Gundam Wing">
+          </div>
+        </div>
+      
+        <div class="field">
+          <label class="label">Catégorie</label>
+          <div class="control">
+            <input class="input " type="text" placeholder="Serie, Jeux vidéo, etc ...">
+          </div>
+        </div>
+
+        <label class="label">Résumé rapide</label>
+        <textarea class="textarea" placeholder="En l'an 2442 de la colonisation ..."></textarea>
+
+        <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="********">
+            </div>
+          </div>
+
+          <label class="label">Image logo Série</label>
+          <div class="file mb-5">
+            <label class="file-label">
+              <input class="file-input" type="file" name="resume">
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  Choose a file…
+                </span>
+              </span>
+            </label>
+          </div>
+      
+        <button class="button is-primary">Valider</button>
+        <button class="button is-danger">Annuler</button>
+      </form>
+</body>
+</html>

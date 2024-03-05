@@ -1,0 +1,15 @@
+<%- include('partials/header.ejs') %>
+
+<main class="container">
+    <h2><%= serie.title %></h2>
+    <div class="presentation">
+    <img src="/content/img/series/<%= serie.img %>" alt="" class="index--image">
+    </div>
+    <br>
+    <p><%- serie.text.replace(/\n/g, '<br>') %></p>
+
+</main>
+
+
+</body>
+</html>

@@ -1,8 +1,9 @@
-require('dotenv').config();
+
 const { MongoClient } = require("mongodb");
-const url = "mongodb://localhost:27017";
+const uri = "mongodb://localhost:27017";
 
-const client = new MongoClient(url);
-const pool = client.connect();  // Connect to the database
+const client = new MongoClient(uri);
 
-module.exports = pool;
+
+module.exports = client
+

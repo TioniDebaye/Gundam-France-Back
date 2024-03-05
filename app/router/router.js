@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const serieController = require('./controllers/serieController')
-const videoGamesController = require('./controllers/videoGamesController')
+const serieController = require('../controllers/serieController')
+const videoGamesController = require('../controllers/videoGamesController')
 
 
 //j'indique pour le moment une route index.ejs en page d'accueil le temps de travailler le reste du site

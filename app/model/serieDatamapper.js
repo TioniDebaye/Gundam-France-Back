@@ -5,21 +5,23 @@ const serieDatamapper = {
     async getAllSeries (req,res, next) {
 
          // Wait for the database connection
-       
+         let result;
+         let error;
 
-        try {
-            const database = await client;
+         try {
+            await client.connect();
+            const database = client.db('Gundam');
+            const seriesCollection = database.collection('series');
+            // Query for a movie that has the title 'Back to the Future'
+            query = {}
+            const series = await seriesCollection.find(query).toArray();
+            console.log(series);
+          } finally {
+            // Ensures that the client will close when you finish/error
+            await client.close();
+          }
 
-            // Accédez à la collection
-            const series = database.db("gundam").collection("series");
-
-            const result = await series.find()
-            console.log(result);
-            res.json(result);
-        } catch (error) {
-            console.error(error);
-            res.status(500).send("Une erreur s'est produite lors de la récupération des séries.");
-        }
+        return {error, result }
 }
 }
 
