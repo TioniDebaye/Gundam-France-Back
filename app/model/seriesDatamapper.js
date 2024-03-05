@@ -1,6 +1,6 @@
 const client = require("../service/dbPool")
 
-const serieDatamapper = {
+const seriesDatamapper = {
 
     async getAllSeries (req,res, next) {
 
@@ -25,4 +25,4 @@ const serieDatamapper = {
 }
 }
 
-module.exports = serieDatamapper
+module.exports = seriesDatamapper

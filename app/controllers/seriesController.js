@@ -1,13 +1,13 @@
 
 
-const  serieDatamapper  = require("../model/serieDatamapper")
+const  seriesDatamapper  = require("../model/seriesDatamapper")
 
 const serieController = {
 
 
     async getAllSeries(req,res,next) {
 
-        const {error, result} = await serieDatamapper.getAllSeries()
+        const {error, result} = await seriesDatamapper.getAllSeries()
 
         if (error) {
             res.send("aucune serie trouvée")
