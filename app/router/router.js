@@ -17,6 +17,10 @@ router.get('/series', seriesController.getAllSeries)
 //route pour affiche la page d'une série en particuliers
 router.get('/ficheserie/:id', seriesController.getOneSerie);
 
+router.delete('/ficheserie/:id', seriesController.deleteOneSerie)
+
+router.post('/series', seriesController.createOneSerie)
+
 
 //route pour afficher la page des mechas
 router.get('/mechas', mechasController.getAllMechas );

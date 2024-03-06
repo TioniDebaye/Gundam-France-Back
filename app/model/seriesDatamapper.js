@@ -41,9 +41,7 @@ const seriesDatamapper = {
 
   /**
    *
-   * @param {*} req
-   * @param {*} res
-   * @param {*} next
+   * @param {*} serieId
    * @returns
    */
 
@@ -68,6 +66,63 @@ const seriesDatamapper = {
 
     return { error, result };
   },
+
+  /**
+   *
+   * @param {*} serieId
+   * @returns
+   */
+
+  async deleteOneSerie(serieId) {
+    let result;
+    let error;
+
+    try {
+      await client.connect();
+      const database = client.db("Gundam");
+      const seriesCollection = database.collection("series");
+
+      // Query for a movie that has the title 'Back to the Future'
+      query = { id: parseInt(serieId) };
+      const oneSerie = await seriesCollection.deleteOne(query);
+
+      result = oneSerie;
+    } finally {
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+
+    return { error, result };
+  },
+
+  /**
+   * 
+   * @param {*} serieId 
+   * @returns 
+   */
+
+  async createOneSerie(obj) {
+    let result;
+    let error;
+
+    try {
+      await client.connect();
+      const database = client.db("Gundam");
+      const seriesCollection = database.collection("series");
+
+      // Query for a movie that has the title 'Back to the Future'
+      query = { obj };
+      const oneSerie = await seriesCollection.insertOne(query);
+
+      result = oneSerie;
+    } finally {
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+
+    return { error, result };
+  },
+
 };
 
 module.exports = seriesDatamapper;

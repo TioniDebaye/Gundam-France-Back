@@ -1,0 +1,20 @@
+
+POST http://localhost:3002/series
+content-type: application/json
+
+{
+  "emergency_degree":2,
+  "status":"open",
+  "comments": "testpostticketsansaddres",
+  "location": "Paris, france",
+  "code_type": 3,
+  "code_machine": 3,
+  "code_client":42
+}
+
+
+GET http://localhost:3002/series HTTP/1.1
+Content-Type: application/json
+
+DELETE http://localhost:3002/ficheserie/5 HTTP/1.1
+Content-Type: application/json
