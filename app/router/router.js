@@ -5,7 +5,7 @@ const mechasController = require('../controllers/mechasController')
 
 
 //j'indique pour le moment une route index.ejs en page d'accueil le temps de travailler le reste du site
-router.get('/', (request, response) => {
+router.get('/', (req, res) => {
     response.render("index.ejs")
 });
 
@@ -13,8 +13,9 @@ router.get('/', (request, response) => {
 
 //route pour afficher la page de récapitulatif des séries
 router.get('/series', seriesController.getAllSeries)
-// //route pour affiche la page d'une série en particuliers
-// router.get('/ficheserie/:serie', serieController.getFicheSerie);
+
+//route pour affiche la page d'une série en particuliers
+router.get('/ficheserie/:id', seriesController.getOneSerie);
 
 
 //route pour afficher la page des mechas
