@@ -1,4 +1,4 @@
-const { ObjectId } = require('mongodb');
+const { ObjectId } = require("mongodb");
 
 const client = require("../service/dbPool");
 
@@ -84,7 +84,7 @@ const seriesDatamapper = {
       const seriesCollection = database.collection("series");
 
       // Query for a movie that has the title 'Back to the Future'
-      query = { id: parseInt(serieId) };
+      query = { _id: new ObjectId(serieId) };
       console.log(query);
       const oneSerie = await seriesCollection.deleteOne(query);
 
@@ -98,9 +98,9 @@ const seriesDatamapper = {
   },
 
   /**
-   * 
-   * @param {*} serieId 
-   * @returns 
+   *
+   * @param {*} serieId
+   * @returns
    */
 
   async createOneSerie(seriesData) {
@@ -113,9 +113,9 @@ const seriesDatamapper = {
       const seriesCollection = database.collection("series");
 
       // Query for a movie that has the title 'Back to the Future'
-      
+
       const oneSerie = await seriesCollection.insertOne(seriesData);
-    
+
       result = oneSerie;
     } finally {
       // Ensures that the client will close when you finish/error
@@ -126,9 +126,9 @@ const seriesDatamapper = {
   },
 
   /**
-   * 
-   * @param {*} seriesData 
-   * @returns 
+   *
+   * @param {*} seriesData
+   * @returns
    */
 
   async modifyOneSerie(serieId, seriesData) {
@@ -141,12 +141,12 @@ const seriesDatamapper = {
       const seriesCollection = database.collection("series");
 
       // Query for a movie that has the title 'Back to the Future'
-      query = {}
+      query = {};
       const oneSerie = await seriesCollection.updateOne(
-        { _id: ObjectId(serieId) }, // Utilisez ObjectId pour convertir la chaîne id en ObjectId
-        { $set: seriesData }
+        { _id: new ObjectId(serieId) }, // Utilisez ObjectId pour convertir la chaîne id en ObjectId
+        { $set: { seriesData } }
       );
-    
+
       result = oneSerie;
     } finally {
       // Ensures that the client will close when you finish/error
@@ -155,7 +155,6 @@ const seriesDatamapper = {
 
     return { error, result };
   },
-
 };
 
 module.exports = seriesDatamapper;
