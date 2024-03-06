@@ -4,6 +4,7 @@ const seriesController = require('../controllers/seriesController')
 const mechasController = require('../controllers/mechasController')
 
 
+
 //j'indique pour le moment une route index.ejs en page d'accueil le temps de travailler le reste du site
 router.get('/', (req, res) => {
     response.render("index.ejs")
@@ -19,7 +20,9 @@ router.get('/ficheserie/:id', seriesController.getOneSerie);
 
 router.delete('/ficheserie/:id', seriesController.deleteOneSerie)
 
-router.post('/series', seriesController.createOneSerie)
+router.post('/series',   seriesController.createOneSerie)
+
+router.patch('ficheserie/:id', seriesController.modifyOneSerie)
 
 
 //route pour afficher la page des mechas

@@ -26,7 +26,9 @@ const serieController = {
    */
 
   async getOneSerie(req, res, next) {
-    const { error, result } = await seriesDatamapper.getOneSerie(req.params.id);
+    serieId = req.params.id
+   
+    const { error, result } = await seriesDatamapper.getOneSerie(serieId);
 
     if (error) {
       res.send("aucune serie trouvée");
@@ -60,8 +62,11 @@ const serieController = {
    */
 
   async createOneSerie(req, res, next) {
-    const { error, result } = await seriesDatamapper.deleteOneSerie(req.body);
+    const seriesData = req.body;
 
+
+    const { error, result } = await seriesDatamapper.createOneSerie(seriesData);
+    
     if (error) {
       res.send("aucune serie trouvée");
     } else {
@@ -69,7 +74,27 @@ const serieController = {
     }
   },
 
+  /**
+   * 
+   * @param {*} req 
+   * @param {*} res 
+   * @param {*} next 
+   */
 
+  async modifyOneSerie(req, res, next) {
+    const seriesData = req.body;
+    const serieId = req.params.id
+
+
+
+    const { error, result } = await seriesDatamapper.modifyOneSerie(serieId,seriesData);
+    
+    if (error) {
+      res.send("aucune serie trouvée");
+    } else {
+      res.json(result);
+    }
+  },
   
 };
 

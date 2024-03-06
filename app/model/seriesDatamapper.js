@@ -1,4 +1,5 @@
-const { ObjectId } = require("mongodb");
+const { ObjectId } = require('mongodb');
+
 const client = require("../service/dbPool");
 
 const seriesDatamapper = {
@@ -55,7 +56,7 @@ const seriesDatamapper = {
       const seriesCollection = database.collection("series");
 
       // Query for a movie that has the title 'Back to the Future'
-      query = { id: parseInt(serieId) };
+      query = { _id: new ObjectId(serieId) };
       const oneSerie = await seriesCollection.findOne(query);
 
       result = oneSerie;
@@ -84,6 +85,7 @@ const seriesDatamapper = {
 
       // Query for a movie that has the title 'Back to the Future'
       query = { id: parseInt(serieId) };
+      console.log(query);
       const oneSerie = await seriesCollection.deleteOne(query);
 
       result = oneSerie;
@@ -101,7 +103,7 @@ const seriesDatamapper = {
    * @returns 
    */
 
-  async createOneSerie(obj) {
+  async createOneSerie(seriesData) {
     let result;
     let error;
 
@@ -111,9 +113,40 @@ const seriesDatamapper = {
       const seriesCollection = database.collection("series");
 
       // Query for a movie that has the title 'Back to the Future'
-      query = { obj };
-      const oneSerie = await seriesCollection.insertOne(query);
+      
+      const oneSerie = await seriesCollection.insertOne(seriesData);
+    
+      result = oneSerie;
+    } finally {
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
 
+    return { error, result };
+  },
+
+  /**
+   * 
+   * @param {*} seriesData 
+   * @returns 
+   */
+
+  async modifyOneSerie(serieId, seriesData) {
+    let result;
+    let error;
+
+    try {
+      await client.connect();
+      const database = client.db("Gundam");
+      const seriesCollection = database.collection("series");
+
+      // Query for a movie that has the title 'Back to the Future'
+      query = {}
+      const oneSerie = await seriesCollection.updateOne(
+        { _id: ObjectId(serieId) }, // Utilisez ObjectId pour convertir la chaîne id en ObjectId
+        { $set: seriesData }
+      );
+    
       result = oneSerie;
     } finally {
       // Ensures that the client will close when you finish/error
