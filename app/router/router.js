@@ -30,6 +30,12 @@ router.get('/mechas', mechasController.getAllMechas );
 
 router.get('/fichemecha/:id', mechasController.getOneMecha)
 
+router.post('/mechas', mechasController.createOneMecha)
+
+router.delete('/fichemecha/:id', mechasController.deleteOneMecha)
+
+router.patch('/fichemecha/:id', mechasController.updateOneMecha)
+
 
 //j'exporte mon module routeur pour que le app.js puisse le lancer
 module.exports = router;

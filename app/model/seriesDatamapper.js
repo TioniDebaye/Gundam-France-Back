@@ -1,5 +1,5 @@
 const { ObjectId } = require("mongodb");
-
+const dot = require('mongo-dot-notation');
 const client = require("../service/dbPool");
 
 const seriesDatamapper = {
@@ -85,7 +85,7 @@ const seriesDatamapper = {
 
       // Query for a movie that has the title 'Back to the Future'
       query = { _id: new ObjectId(serieId) };
-      console.log(query);
+
       const oneSerie = await seriesCollection.deleteOne(query);
 
       result = oneSerie;
@@ -134,6 +134,7 @@ const seriesDatamapper = {
   async modifyOneSerie(serieId, seriesData) {
     let result;
     let error;
+    const transformedserieData = dot.flatten(seriesData)
     
     console.log(seriesData.title);
 
@@ -141,12 +142,10 @@ const seriesDatamapper = {
       await client.connect();
       const database = client.db("Gundam");
       const seriesCollection = database.collection("series");
-
-      // Query for a movie that has the title 'Back to the Future'
-      query = {};
+  
       const oneSerie = await seriesCollection.updateOne(
         { _id: new ObjectId(serieId) }, // Utilisez ObjectId pour convertir la chaîne id en ObjectId
-        { $set: { title: seriesData.title } }
+        transformedserieData,
       );
 
       result = oneSerie;
