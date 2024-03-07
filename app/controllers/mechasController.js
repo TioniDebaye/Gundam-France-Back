@@ -18,6 +18,13 @@ const mechasController = {
     }
   },
 
+  /**
+   * 
+   * @param {*} req 
+   * @param {*} res 
+   * @param {*} next 
+   */
+
   async getOneMecha(req, res, next) {
     mechaId = req.params.id
     
@@ -29,6 +36,13 @@ const mechasController = {
       res.json(result);
     }
   },
+
+  /**
+   * 
+   * @param {*} req 
+   * @param {*} res 
+   * @param {*} next 
+   */
 
   async deleteOneMecha (req, res, next) {
 
@@ -44,6 +58,13 @@ const mechasController = {
     }
   }, 
 
+  /**
+   * 
+   * @param {*} req 
+   * @param {*} res 
+   * @param {*} next 
+   */
+
   async createOneMecha (req, res, next) {
 
     mechaData = req.body
@@ -57,6 +78,13 @@ const mechasController = {
     }
 
   }, 
+
+  /**
+   * 
+   * @param {*} req 
+   * @param {*} res 
+   * @param {*} next 
+   */
 
   async updateOneMecha (req, res, next) {
     const mechaId = req.params.id

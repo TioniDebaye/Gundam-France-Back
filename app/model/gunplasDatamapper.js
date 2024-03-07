@@ -3,6 +3,12 @@ const { ObjectId } = require("mongodb");
 const dot = require("mongo-dot-notation");
 
 const gunplasDatamapper = {
+
+  /**
+   * 
+   * @returns 
+   */
+
   async getAllGunplas() {
     let error;
     let result;
@@ -21,6 +27,12 @@ const gunplasDatamapper = {
     return { error, result };
   },
 
+  /**
+   * 
+   * @param {*} gunplaId 
+   * @returns 
+   */
+
   async getOneGunpla(gunplaId) {
     let error;
     let result;
@@ -38,6 +50,12 @@ const gunplasDatamapper = {
     }
     return { error, result }
   },
+  
+  /**
+   * 
+   * @param {*} gunplaData 
+   * @returns 
+   */
 
   async createOneGunpla(gunplaData) {
 
@@ -57,6 +75,12 @@ const gunplasDatamapper = {
     return { error, result }
   },
 
+  /**
+   * 
+   * @param {*} gunplaId 
+   * @returns 
+   */
+
   async deleteOneGunpla(gunplaId) {
     let error;
     let result;
@@ -74,6 +98,13 @@ const gunplasDatamapper = {
     }
     return { error, result }
   },
+
+  /**
+   * 
+   * @param {*} gunplaId 
+   * @param {*} gunplaData 
+   * @returns 
+   */
 
   async updateOneGunpla(gunplaId, gunplaData) {
     let error;

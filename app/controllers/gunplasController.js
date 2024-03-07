@@ -2,6 +2,13 @@ const gunplasDatamapper = require('../model/gunplasDatamapper')
 
 const gunplasController = {
 
+    /**
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} next 
+     */
+
     async getAllGunplas (req, res, next) {
 
         const { error, result } = await gunplasDatamapper.getAllGunplas();
@@ -13,6 +20,13 @@ const gunplasController = {
         }
 
     }, 
+
+    /**
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} next 
+     */
 
     async getOneGunpla (req, res, next) {
         const gunplaId = req.params.id
@@ -26,6 +40,13 @@ const gunplasController = {
         }
     }, 
 
+    /**
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} next 
+     */
+
     async createOneGunpla (req, res, next) {
         const gunplaData = req.body
         const { error, result } = await gunplasDatamapper.createOneGunpla(gunplaData);
@@ -37,6 +58,13 @@ const gunplasController = {
         }
     }, 
 
+    /**
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} next 
+     */
+
     async deleteOneGunpla (req, res, next) {
         const gunplaId = req.params.id
         const { error, result } = await gunplasDatamapper.deleteOneGunpla(gunplaId);
@@ -47,6 +75,13 @@ const gunplasController = {
           res.json(result);
         }
     }, 
+
+    /**
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} next 
+     */
 
     async updateOneGunpla (req, res, next) {
         gunplaId = req.params.id
