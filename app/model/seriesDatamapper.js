@@ -136,8 +136,6 @@ const seriesDatamapper = {
     let error;
     const transformedserieData = dot.flatten(seriesData)
     
-    console.log(seriesData.title);
-
     try {
       await client.connect();
       const database = client.db("Gundam");

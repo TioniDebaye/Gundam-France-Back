@@ -1,0 +1,19 @@
+[
+    {
+
+        "title": "justice Gundam",
+        "category" : "hg",  
+        "taille" : "22cm",  
+        "armement" : "Beam Cannon principal, tourelles défensives",  
+        "description": "c'est la guerre"
+    }, 
+    {
+
+        "title": "Freedom Gundam",
+        "category" : "mg",  
+        "taille" : "21cm",  
+        "armement" : "Beam Cannon principal, tourelles défensives",  
+        "description": "c'est la guerre"
+          
+    }
+]

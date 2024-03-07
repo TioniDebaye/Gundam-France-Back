@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const seriesController = require('../controllers/seriesController')
 const mechasController = require('../controllers/mechasController')
+const gunplasController = require('../controllers/gunplasController')
 
 
 
@@ -10,32 +11,30 @@ router.get('/', (req, res) => {
     response.render("index.ejs")
 });
 
-//j'indique ici la route pour les series, je lui passe la variable series qui pointe sur mon fichier json pour boucler dessus
+
 
 //route pour afficher la page de récapitulatif des séries
 router.get('/series', seriesController.getAllSeries)
-
-//route pour affiche la page d'une série en particuliers
 router.get('/ficheserie/:id', seriesController.getOneSerie);
-
 router.delete('/ficheserie/:id', seriesController.deleteOneSerie)
-
 router.post('/series',   seriesController.createOneSerie)
-
 router.patch('/ficheserie/:id', seriesController.modifyOneSerie)
 
 
 //route pour afficher la page des mechas
 router.get('/mechas', mechasController.getAllMechas );
-
 router.get('/fichemecha/:id', mechasController.getOneMecha)
-
 router.post('/mechas', mechasController.createOneMecha)
-
 router.delete('/fichemecha/:id', mechasController.deleteOneMecha)
-
 router.patch('/fichemecha/:id', mechasController.updateOneMecha)
 
+//route pour les gunplas 
+
+router.get('/gunplas', gunplasController.getAllGunplas);
+router.get('/fichegunpla/:id', gunplasController.getOneGunpla)
+router.post('/gunplas', gunplasController.createOneGunpla)
+router.delete('/fichegunpla/:id', gunplasController.deleteOneGunpla)
+router.patch('/fichegunpla/:id', gunplasController.updateOneGunpla)
 
 //j'exporte mon module routeur pour que le app.js puisse le lancer
 module.exports = router;
