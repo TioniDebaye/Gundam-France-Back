@@ -22,7 +22,7 @@ router.delete('/ficheserie/:id', seriesController.deleteOneSerie)
 
 router.post('/series',   seriesController.createOneSerie)
 
-router.patch('ficheserie/:id', seriesController.modifyOneSerie)
+router.patch('/ficheserie/:id', seriesController.modifyOneSerie)
 
 
 //route pour afficher la page des mechas

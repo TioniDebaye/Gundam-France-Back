@@ -134,6 +134,8 @@ const seriesDatamapper = {
   async modifyOneSerie(serieId, seriesData) {
     let result;
     let error;
+    
+    console.log(seriesData.title);
 
     try {
       await client.connect();
@@ -144,7 +146,7 @@ const seriesDatamapper = {
       query = {};
       const oneSerie = await seriesCollection.updateOne(
         { _id: new ObjectId(serieId) }, // Utilisez ObjectId pour convertir la chaîne id en ObjectId
-        { $set: { seriesData } }
+        { $set: { title: seriesData.title } }
       );
 
       result = oneSerie;

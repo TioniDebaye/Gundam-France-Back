@@ -83,13 +83,13 @@ const serieController = {
 
   async modifyOneSerie(req, res, next) {
     const seriesData = req.body;
-    seriesData._id = req.params.id
+    serieId = req.params.id
   
-    console.log(seriesData);
+ 
 
 
 
-    const { error, result } = await seriesDatamapper.modifyOneSerie(seriesData);
+    const { error, result } = await seriesDatamapper.modifyOneSerie(serieId, seriesData);
     
     if (error) {
       res.send("aucune serie trouvée");
