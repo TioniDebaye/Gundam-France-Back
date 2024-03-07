@@ -17,6 +17,18 @@ const mechasController = {
       res.json(result);
     }
   },
+
+  async getOneMecha(req, res, next) {
+    mechaId = req.params.id
+    
+    const { error, result } = await mechasDatamapper.getOneMecha(mechaId);
+
+    if (error) {
+      res.send("aucune serie trouvée");
+    } else {
+      res.json(result);
+    }
+  },
 };
 
 module.exports = mechasController;

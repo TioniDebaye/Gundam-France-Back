@@ -27,8 +27,8 @@ router.patch('/ficheserie/:id', seriesController.modifyOneSerie)
 
 //route pour afficher la page des mechas
 router.get('/mechas', mechasController.getAllMechas );
-// //route pour afficher une fiche de jeu vidéo
-// router.get('/videogames/:game', );
+
+router.get('/fichemecha/:id', mechasController.getOneMecha)
 
 
 //j'exporte mon module routeur pour que le app.js puisse le lancer

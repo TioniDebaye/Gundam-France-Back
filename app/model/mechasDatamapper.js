@@ -1,4 +1,5 @@
 const client = require("../service/dbPool");
+const { ObjectId } = require('mongodb')
 
 const mechasController = {
 
@@ -30,6 +31,39 @@ const mechasController = {
 
     return { error, result };
   },
+
+  async getOneMecha (mechaId) {
+      let result; 
+      let error; 
+
+      console.log(mechaId);
+
+      try {
+        await client.connect()
+        const database = client.db("Gundam");
+        const mechasCollection = database.collection("mechas")
+
+        query = { _id: new ObjectId(mechaId) };
+        const oneMecha = await mechasCollection.findOne(query)
+        console.log(oneMecha);
+      } finally  {
+        await client.close();
+      }
+
+      return { error, result }
+  }, 
+
+  async deleteOneMecha () {
+
+  }, 
+
+  async createOneMecha () {
+
+  }, 
+
+  async updateOneMecha () {
+
+  }
 };
 
 module.exports = mechasController;
