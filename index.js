@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const router = require('./app/router/router');
 const port = 3002;
+const bodyParser = require('body-parser')
 
 
 const cors= require('cors');
@@ -16,6 +17,11 @@ app.use(express.json());
 
 
 app.use(express.urlencoded({ extended: true }));
+
+// Utiliser body-parser pour analyser les données du corps des requêtes
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.raw());
 
 app.use(cors(
   {

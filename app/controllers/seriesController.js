@@ -63,6 +63,7 @@ const serieController = {
 
   async createOneSerie(req, res, next) {
     const seriesData = req.body;
+    console.log(seriesData);
 
 
     const { error, result } = await seriesDatamapper.createOneSerie(seriesData);

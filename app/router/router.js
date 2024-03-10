@@ -11,13 +11,13 @@ router.get('/', (req, res) => {
     response.render("index.ejs")
 });
 
-
+router.get('/app/admin')
 
 //route pour afficher la page de récapitulatif des séries
 router.get('/series', seriesController.getAllSeries)
 router.get('/ficheserie/:id', seriesController.getOneSerie);
 router.delete('/ficheserie/:id', seriesController.deleteOneSerie)
-router.post('/series',   seriesController.createOneSerie)
+router.post('/series/create',   seriesController.createOneSerie)
 router.patch('/ficheserie/:id', seriesController.modifyOneSerie)
 
 
