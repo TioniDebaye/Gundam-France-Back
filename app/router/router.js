@@ -24,7 +24,7 @@ router.patch('/ficheserie/:id', seriesController.modifyOneSerie)
 //route pour afficher la page des mechas
 router.get('/mechas', mechasController.getAllMechas );
 router.get('/fichemecha/:id', mechasController.getOneMecha)
-router.post('/mechas', mechasController.createOneMecha)
+router.post('/mechas/create', mechasController.createOneMecha)
 router.delete('/fichemecha/:id', mechasController.deleteOneMecha)
 router.patch('/fichemecha/:id', mechasController.updateOneMecha)
 
