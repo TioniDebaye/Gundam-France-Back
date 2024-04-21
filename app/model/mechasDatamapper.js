@@ -24,6 +24,15 @@ const mechasController = {
       // Query for a movie that has the title 'Back to the Future'
       query = {};
       const mechas = await mechasCollection.find(query).toArray();
+  
+      // Creating excerpts for each mecha
+      for (let index = 0; index < mechas.length; index++) {
+        const text = mechas[index].history;
+        let words = text.split(" ");
+        words = words.slice(0, 30);
+        const defCourte = words.join(" ") + " ...";
+        mechas[index].defCourte = defCourte;
+      }
       result = mechas;
     } finally {
       // Ensures that the client will close when you finish/error
