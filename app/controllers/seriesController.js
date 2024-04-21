@@ -85,6 +85,7 @@ const serieController = {
   async modifyOneSerie(req, res, next) {
     const seriesData = req.body;
     const serieId = req.params.id
+    console.log(seriesData);
   
  
 

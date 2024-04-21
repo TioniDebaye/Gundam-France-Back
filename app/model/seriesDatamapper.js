@@ -25,7 +25,7 @@ const seriesDatamapper = {
       const series = await seriesCollection.find(query).toArray();
       // Creating excerpts for each series
       for (let index = 0; index < series.length; index++) {
-        const text = series[index].text;
+        const text = series[index].presentation;
         let words = text.split(" ");
         words = words.slice(0, 30);
         const defCourte = words.join(" ") + " ...";
@@ -134,7 +134,7 @@ const seriesDatamapper = {
   async modifyOneSerie(serieId, seriesData) {
     let result;
     let error;
-    const transformedserieData = dot.flatten(seriesData)
+    const { _id, ...updateData } = seriesData;
     
     try {
       await client.connect();
@@ -142,8 +142,8 @@ const seriesDatamapper = {
       const seriesCollection = database.collection("series");
   
       const oneSerie = await seriesCollection.updateOne(
-        { _id: new ObjectId(serieId) }, // Utilisez ObjectId pour convertir la chaîne id en ObjectId
-        transformedserieData,
+        { _id: new ObjectId(seriesData._id) }, // Utilisez ObjectId pour convertir la chaîne id en ObjectId
+        {$set: updateData}
       );
 
       result = oneSerie;
