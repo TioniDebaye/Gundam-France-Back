@@ -3,6 +3,7 @@ const router = express.Router();
 const seriesController = require('../controllers/seriesController')
 const mechasController = require('../controllers/mechasController')
 const gunplasController = require('../controllers/gunplasController')
+const universesController = require('../controllers/universesController')
 
 
 
@@ -20,6 +21,9 @@ router.delete('/ficheserie/:id', seriesController.deleteOneSerie)
 router.post('/series/create',   seriesController.createOneSerie)
 router.patch('/ficheserie/:id', seriesController.modifyOneSerie)
 
+//route pour afficher les univers
+router.get('/univers', seriesController.getAllSeries)
+
 
 //route pour afficher la page des mechas
 router.get('/mechas', mechasController.getAllMechas );
@@ -35,6 +39,8 @@ router.get('/fichegunpla/:id', gunplasController.getOneGunpla)
 router.post('/gunplas', gunplasController.createOneGunpla)
 router.delete('/fichegunpla/:id', gunplasController.deleteOneGunpla)
 router.patch('/fichegunpla/:id', gunplasController.updateOneGunpla)
+
+router.get('/universes', universesController.getAllUniverses )
 
 //j'exporte mon module routeur pour que le app.js puisse le lancer
 module.exports = router;
