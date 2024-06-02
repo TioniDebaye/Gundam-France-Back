@@ -39,7 +39,36 @@ const universesDatamapper = {
     }
 
     return { error, result };
-  }
+  }, 
+
+
+  /**
+   * @param {*} Id
+   * @returns
+   */
+
+  async getOneUnivers(universId) {
+    let result;
+    let error;
+  
+    try {
+      await client.connect();
+      const database = client.db("Gundam");
+      const universesCollection = database.collection("universes");
+
+      // Query for a movie that has the title 'Back to the Future'
+      query = { _id: new ObjectId(universId) };
+    
+      const oneUnivers = await universesCollection.findOne(query);
+
+      result = oneUnivers;
+    } finally {
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+
+    return { error, result };
+  },
 
 }
 

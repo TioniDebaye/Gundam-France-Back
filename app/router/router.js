@@ -41,6 +41,6 @@ router.delete('/fichegunpla/:id', gunplasController.deleteOneGunpla)
 router.patch('/fichegunpla/:id', gunplasController.updateOneGunpla)
 
 router.get('/universes', universesController.getAllUniverses )
-
+router.get('/ficheunivers/:id', universesController.getOneUnivers )
 //j'exporte mon module routeur pour que le app.js puisse le lancer
 module.exports = router;
