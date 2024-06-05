@@ -4,6 +4,7 @@ const seriesController = require('../controllers/seriesController')
 const mechasController = require('../controllers/mechasController')
 const gunplasController = require('../controllers/gunplasController')
 const universesController = require('../controllers/universesController')
+const upload = require('../service/multer')
 
 
 
@@ -18,8 +19,8 @@ router.get('/app/admin')
 router.get('/series', seriesController.getAllSeries)
 router.get('/ficheserie/:id', seriesController.getOneSerie);
 router.delete('/ficheserie/:id', seriesController.deleteOneSerie)
-router.post('/series/create',   seriesController.createOneSerie)
-router.patch('/ficheserie/:id', seriesController.modifyOneSerie)
+router.post('/series/create',  upload.single('img'), seriesController.createOneSerie)
+router.patch('/ficheserie/:id', upload.single('img'),  seriesController.modifyOneSerie)
 
 //route pour afficher les univers
 router.get('/univers', seriesController.getAllSeries)
@@ -28,7 +29,7 @@ router.get('/univers', seriesController.getAllSeries)
 //route pour afficher la page des mechas
 router.get('/mechas', mechasController.getAllMechas );
 router.get('/fichemecha/:id', mechasController.getOneMecha)
-router.post('/mechas/create', mechasController.createOneMecha)
+router.post('/mechas/create',  mechasController.createOneMecha)
 router.delete('/fichemecha/:id', mechasController.deleteOneMecha)
 router.patch('/fichemecha/:id', mechasController.updateOneMecha)
 

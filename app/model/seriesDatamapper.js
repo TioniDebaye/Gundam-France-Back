@@ -23,6 +23,7 @@ const seriesDatamapper = {
       // Query for a movie that has the title 'Back to the Future'
       query = {};
       const series = await seriesCollection.find(query).toArray();
+      if (series.length >= 30) {
       // Creating excerpts for each series
       for (let index = 0; index < series.length; index++) {
         const text = series[index].presentation;
@@ -30,7 +31,7 @@ const seriesDatamapper = {
         words = words.slice(0, 30);
         const defCourte = words.join(" ") + " ...";
         series[index].defCourte = defCourte;
-      }
+      }}
       result = series;
     } finally {
       // Ensures that the client will close when you finish/error
@@ -135,7 +136,7 @@ const seriesDatamapper = {
     let result;
     let error;
     const { _id, ...updateData } = seriesData;
-    
+  
     try {
       await client.connect();
       const database = client.db("Gundam");

@@ -1,4 +1,7 @@
+const { log } = require("console");
 const seriesDatamapper = require("../model/seriesDatamapper");
+const path = require('path');
+
 
 const serieController = {
   /**
@@ -63,6 +66,7 @@ const serieController = {
 
   async createOneSerie(req, res, next) {
     const seriesData = req.body;
+    seriesData.img = req.file.path;
     console.log(seriesData);
 
 
@@ -84,6 +88,8 @@ const serieController = {
 
   async modifyOneSerie(req, res, next) {
     const seriesData = req.body;
+    seriesData.img = req.file.path;
+    
     const serieId = req.params.id
     console.log(seriesData);
   
