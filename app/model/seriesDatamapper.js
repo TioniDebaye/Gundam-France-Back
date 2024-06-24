@@ -1,6 +1,7 @@
 const { ObjectId } = require("mongodb");
 const dot = require('mongo-dot-notation');
 const client = require("../service/dbPool");
+const dbPool = require("../service/dbPool");
 
 const seriesDatamapper = {
   /**
@@ -17,9 +18,8 @@ const seriesDatamapper = {
     let error;
 
     try {
-      await client.connect();
-      const database = client.db("Gundam");
-      const seriesCollection = database.collection("series");
+      const db = dbPool.getDb();
+      const seriesCollection = db.collection("series");
       // Query for a movie that has the title 'Back to the Future'
       query = {};
       const series = await seriesCollection.find(query).toArray();
@@ -27,15 +27,16 @@ const seriesDatamapper = {
       // Creating excerpts for each series
       for (let index = 0; index < series.length; index++) {
         const text = series[index].presentation;
+        
         let words = text.split(" ");
         words = words.slice(0, 30);
         const defCourte = words.join(" ") + " ...";
         series[index].defCourte = defCourte;
       }}
       result = series;
-    } finally {
-      // Ensures that the client will close when you finish/error
-      await client.close();
+     
+    } catch (err) {
+      error = err;
     }
 
     return { error, result };
@@ -52,18 +53,16 @@ const seriesDatamapper = {
     let error;
 
     try {
-      await client.connect();
-      const database = client.db("Gundam");
-      const seriesCollection = database.collection("series");
+      const db = dbPool.getDb();
+      const seriesCollection = db.collection("series");
 
       // Query for a movie that has the title 'Back to the Future'
-      query = { _id: new ObjectId(serieId) };
+      query = { _id: new ObjectId.createFromHexString(serieId) };
       const oneSerie = await seriesCollection.findOne(query);
 
       result = oneSerie;
-    } finally {
-      // Ensures that the client will close when you finish/error
-      await client.close();
+    } catch (err) {
+      error = err;
     }
 
     return { error, result };
@@ -80,19 +79,17 @@ const seriesDatamapper = {
     let error;
 
     try {
-      await client.connect();
-      const database = client.db("Gundam");
-      const seriesCollection = database.collection("series");
+      const db = dbPool.getDb();
+      const seriesCollection = db.collection("series");
 
       // Query for a movie that has the title 'Back to the Future'
-      query = { _id: new ObjectId(serieId) };
+      query = { _id: new ObjectId.createFromHexString(serieId) };
 
       const oneSerie = await seriesCollection.deleteOne(query);
 
       result = oneSerie;
-    } finally {
-      // Ensures that the client will close when you finish/error
-      await client.close();
+    } catch (err) {
+      error = err;
     }
 
     return { error, result };
@@ -109,18 +106,16 @@ const seriesDatamapper = {
     let error;
 
     try {
-      await client.connect();
-      const database = client.db("Gundam");
-      const seriesCollection = database.collection("series");
+      const db = dbPool.getDb();
+      const seriesCollection = db.collection("series");
 
       // Query for a movie that has the title 'Back to the Future'
 
       const oneSerie = await seriesCollection.insertOne(seriesData);
 
       result = oneSerie;
-    } finally {
-      // Ensures that the client will close when you finish/error
-      await client.close();
+    } catch (err) {
+      error = err;
     }
 
     return { error, result };
@@ -135,22 +130,18 @@ const seriesDatamapper = {
   async modifyOneSerie(serieId, seriesData) {
     let result;
     let error;
-    const { _id, ...updateData } = seriesData;
+    
   
     try {
-      await client.connect();
-      const database = client.db("Gundam");
-      const seriesCollection = database.collection("series");
-  
-      const oneSerie = await seriesCollection.updateOne(
-        { _id: new ObjectId(seriesData._id) }, // Utilisez ObjectId pour convertir la chaîne id en ObjectId
-        {$set: updateData}
-      );
+      const db = dbPool.getDb();
+      const seriesCollection = db.collection("series");
+      
+      query = { _id: new ObjectId.createFromHexString(serieId) };
+      const oneSerie = await seriesCollection.updateOne(query,{$set: seriesData});
 
       result = oneSerie;
-    } finally {
-      // Ensures that the client will close when you finish/error
-      await client.close();
+    } catch (err) {
+      error = err;
     }
 
     return { error, result };

@@ -1,9 +1,11 @@
 const client = require("../service/dbPool");
 const { ObjectId } = require("mongodb");
 const dot = require("mongo-dot-notation");
+const dbPool = require("../service/dbPool");
+const e = require("cors");
+const { query } = require("express");
 
 const mechasController = {
-  
   /**
    *
    * @param {*} req
@@ -18,34 +20,33 @@ const mechasController = {
     let error;
 
     try {
-      await client.connect();
-      const database = client.db("Gundam");
-      const mechasCollection = database.collection("mechas");
+      const db = dbPool.getDb();
+      const mechasCollection = db.collection("mechas");
       // Query for a movie that has the title 'Back to the Future'
-      query = {};
-      const mechas = await mechasCollection.find(query).toArray();
-  
-      // Creating excerpts for each mecha
-      for (let index = 0; index < mechas.length; index++) {
-        const text = mechas[index].history;
-        let words = text.split(" ");
-        words = words.slice(0, 30);
-        const defCourte = words.join(" ") + " ...";
-        mechas[index].defCourte = defCourte;
-      }
+      const mechas = await mechasCollection.find({}).toArray();
+      
+        // Creating excerpts for each mecha
+        for (let index = 0; index < mechas.length; index++) {
+          const text = mechas[index].history;
+          let words = text.split(" ");
+          words = words.slice(0, 30);
+          const defCourte = words.join(" ") + " ...";
+          mechas[index].defCourte = defCourte;
+        }
+      
       result = mechas;
-    } finally {
-      // Ensures that the client will close when you finish/error
-      await client.close();
+      
+    } catch (err) {
+      error = err;
     }
 
     return { error, result };
   },
 
   /**
-   * 
-   * @param {*} mechaId 
-   * @returns 
+   *
+   * @param {*} mechaId
+   * @returns
    */
 
   async getOneMecha(mechaId) {
@@ -53,24 +54,23 @@ const mechasController = {
     let error;
 
     try {
-      await client.connect();
-      const database = client.db("Gundam");
-      const mechasCollection = database.collection("mechas");
+      const db = dbPool.getDb();
+      const mechasCollection = db.collection("mechas");
 
-      query = { _id: new ObjectId(mechaId) };
+      query = { _id: new ObjectId.createFromHexString(mechaId) };
       const oneMecha = await mechasCollection.findOne(query);
       result = oneMecha;
-    } finally {
-      await client.close();
+    } catch (err) {
+      error = err;
     }
 
     return { error, result };
   },
 
   /**
-   * 
-   * @param {object} mechaId 
-   * @returns 
+   *
+   * @param {object} mechaId
+   * @returns
    */
 
   async deleteOneMecha(mechaId) {
@@ -78,23 +78,22 @@ const mechasController = {
     let result;
 
     try {
-      await client.connect();
-      const database = client.db("Gundam");
-      const mechasCollection = database.collection("mechas");
+      const db = dbPool.getDb();
+      const mechasCollection = db.collection("mechas");
 
-      query = { _id: new ObjectId(mechaId) };
+      query = { _id: new ObjectId.createFromHexString(mechaId) };
       const oneMecha = await mechasCollection.deleteOne(query);
       result = oneMecha;
-    } finally {
-      await client.close();
+    } catch (err) {
+      error = err;
     }
     return { error, result };
   },
 
   /**
-   * 
-   * @param {*} mechaData 
-   * @returns 
+   *
+   * @param {*} mechaData
+   * @returns
    */
 
   async createOneMecha(mechaData) {
@@ -102,42 +101,37 @@ const mechasController = {
     let result;
 
     try {
-      await client.connect();
-      const database = client.db("Gundam");
-      const mechasCollection = database.collection("mechas");
+      const db = dbPool.getDb();
+      const mechasCollection = db.collection("mechas");
 
       const oneMecha = await mechasCollection.insertOne(mechaData);
       result = oneMecha;
-    } finally {
-      await client.close();
+    } catch (err) {
+      error = err;
     }
     return { error, result };
   },
 
   /**
-   * 
-   * @param {*} mechaId 
-   * @param {*} mechaData 
-   * @returns 
+   *
+   * @param {*} mechaId
+   * @param {*} mechaData
+   * @returns
    */
 
   async updateOneMecha(mechaId, mechaData) {
     let error;
     let result;
-    const transformedMechaData = dot.flatten(mechaData);
 
     try {
-      await client.connect();
-      const database = client.db("Gundam");
-      const mechasCollection = database.collection("mechas");
+      const db = dbPool.getDb();
+      const mechasCollection = db.collection("mechas");
 
-      const onemecha = await mechasCollection.updateOne(
-        { _id: new ObjectId(mechaId) },
-        transformedMechaData
-      );
+      query = { _id: new ObjectId.createFromHexString(mechaId) };
+      const onemecha = await mechasCollection.updateOne(query, {$set: mechaData});
       result = onemecha;
-    } finally {
-      await client.close();
+    } catch (err) {
+      error = err;
     }
     return { error, result };
   },

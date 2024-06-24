@@ -12,7 +12,7 @@ const mechasController = {
     const { error, result } = await mechasDatamapper.getAllMechas();
 
     if (error) {
-      res.send("aucun mecha trouvé");
+      res.status(404).json({ message: "aucun mecha trouvé" });
     } else {
       res.json(result);
     }
@@ -31,7 +31,7 @@ const mechasController = {
     const { error, result } = await mechasDatamapper.getOneMecha(mechaId);
 
     if (error) {
-      res.send("aucun mecha trouvé");
+      res.status(404).json({ message: "aucun mecha trouvé" });
     } else {
       res.json(result);
     }
@@ -52,7 +52,7 @@ const mechasController = {
     const { error, result } = await mechasDatamapper.deleteOneMecha(mechaId)
 
     if (error) {
-      res.send("aucun mecha trouvé");
+      res.status(404).json({ message: "aucun mecha trouvé" });
     } else {
       res.json(result);
     }
@@ -72,7 +72,7 @@ const mechasController = {
     const { error, result} = await mechasDatamapper.createOneMecha(mechaData)
 
     if (error) {
-      res.send("création de la fiche mécha impossible")
+      res.status(404).json({message:"création de la fiche mécha impossible"});
     } else {
       res.json(result)
     }
@@ -94,7 +94,7 @@ const mechasController = {
     const { error, result } = await mechasDatamapper.updateOneMecha(mechaId, mechaData)
 
     if (error) {
-      res.send("modification de la fiche mécha impossible")
+      res.status(404).json({message:"modification de la fiche mécha impossible"});
     } else {
       res.json(result)
     }

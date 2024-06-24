@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const router = require('./app/router/router');
 const port = 3002;
+const dbPool = require("./app/service/dbPool");
 const bodyParser = require('body-parser')
 
 
@@ -32,6 +33,14 @@ app.use(cors(
 ));
 //j'indique à express d'utiliser mon fichier routeur
 app.use(router);
+
+dbPool.connectToServer()
+    .then(() => {
+        console.log('Connected to MongoDB, Databse Gundam');
+    })
+    .catch((err) => {
+        console.error(err);
+    });
 
 //j'écoute sur le port défini plus haut
 app.listen(port, () => {

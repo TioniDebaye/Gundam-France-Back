@@ -1,29 +1,42 @@
 const client = require("../service/dbPool");
 const { ObjectId } = require("mongodb");
 const dot = require("mongo-dot-notation");
+const dbPool = require("../service/dbPool");
 
 const gunplasDatamapper = {
 
   /**
-   * 
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
    * @returns 
    */
 
   async getAllGunplas() {
+
     let error;
     let result;
 
     try {
-      await client.connect();
-      const database = client.db("Gundam");
-      const gunplasCollection = database.collection("gunplas");
+      const db = dbPool.getDb();
+      const gunplasCollection = db.collection("gunplas");
       // Query for a movie that has the title 'Back to the Future'
       query = {};
-      const mechas = await gunplasCollection.find(query).toArray();
-      result = mechas;
-    } finally {
-      await client.close();
-    }
+      const gunplas = await gunplasCollection.find(query).toArray();
+
+      if (gunplas.length >= 30) {
+        // Creating excerpts for each series
+        for (let index = 0; index < gunplas.length; index++) {
+          const text = gunplas[index].presentation;
+          let words = text.split(" ");
+          words = words.slice(0, 30);
+          const defCourte = words.join(" ") + " ...";
+          gunplas[index].defCourte = defCourte;
+        }}
+      result = gunplas;
+    } catch (err) {
+      error = err;
+  }
     return { error, result };
   },
 
@@ -38,15 +51,14 @@ const gunplasDatamapper = {
     let result;
 
     try {
-      await client.connect();
-      const database = client.db("Gundam");
-      const gunplasCollection = database.collection("gunplas");
+      const db = dbPool.getDb();
+      const gunplasCollection = db.collection("gunplas");
 
-      query = { _id: new ObjectId(gunplaId) };
+      query = { _id: new ObjectId.createFromHexString(gunplaId) };
       const oneGunpla = await gunplasCollection.findOne(query);
       result = oneGunpla;
-    } finally {
-      await client.close();
+    } catch (err) {
+      error = err;
     }
     return { error, result }
   },
@@ -63,14 +75,13 @@ const gunplasDatamapper = {
     let result;
 
     try {
-      await client.connect();
-      const database = client.db("Gundam");
-      const gunplasCollection = database.collection("gunplas");
+      const db = dbPool.getDb();
+      const gunplasCollection = db.collection("gunplas");
 
       const oneGunpla = await gunplasCollection.insertOne(gunplaData)
       result = oneGunpla
-    } finally {
-        await client.close();
+    } catch (err) {
+      error = err;
     }
     return { error, result }
   },
@@ -86,22 +97,21 @@ const gunplasDatamapper = {
     let result;
 
     try {
-      await client.connect();
-      const database = client.db("Gundam");
-      const gunplasCollection = database.collection("gunplas");
+      const db = dbPool.getDb();
+      const gunplasCollection = db.collection("gunplas");
 
-      query = {_id: new ObjectId(gunplaId)}
+      query = {_id: new ObjectId.createFromHexString(gunplaId)}
       const oneGunpla = await gunplasCollection.deleteOne(query)
       result = oneGunpla
-    } finally {
-        await client.close();
+    } catch (err){
+      error = err;
     }
     return { error, result }
   },
 
   /**
    * 
-   * @param {*} gunplaId 
+   * @param {string} gunplaId 
    * @param {*} gunplaData 
    * @returns 
    */
@@ -109,17 +119,17 @@ const gunplasDatamapper = {
   async updateOneGunpla(gunplaId, gunplaData) {
     let error;
     let result;
-    const transformedGunplaData = dot.flatten(gunplaData)
+    
 
     try {
-      await client.connect();
-      const database = client.db("Gundam");
-      const gunplasCollection = database.collection("gunplas");
+      const db = dbPool.getDb();
+      const gunplasCollection = db.collection("gunplas");
 
-      const oneGunpla = await gunplasCollection.updateOne({ _id: new ObjectId(gunplaId)}, transformedGunplaData)
+      query = {_id: new ObjectId.createFromHexString(gunplaId)}
+      const oneGunpla = await gunplasCollection.updateOne(query, {$set: gunplaData})
       result = oneGunpla
-    } finally {
-        await client.close()
+    } catch(err)  {
+      error = err;
     }
     return { error, result }
   },

@@ -89,13 +89,7 @@ const serieController = {
   async modifyOneSerie(req, res, next) {
     const seriesData = req.body;
     seriesData.img = req.file.path;
-    
     const serieId = req.params.id
-    console.log(seriesData);
-  
- 
-
-
 
     const { error, result } = await seriesDatamapper.modifyOneSerie(serieId, seriesData);
     

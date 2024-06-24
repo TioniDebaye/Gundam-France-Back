@@ -1,6 +1,7 @@
 const client = require("../service/dbPool");
 const { ObjectId } = require("mongodb");
 const dot = require("mongo-dot-notation");
+const dbPool = require("../service/dbPool");
 
 
 const universesDatamapper = {
@@ -18,24 +19,22 @@ const universesDatamapper = {
     let error;
 
     try {
-      await client.connect();
-      const database = client.db("Gundam");
-      const universesCollection = database.collection("universes");
+      const db = dbPool.getDb();
+      const universesCollection = db.collection("universes");
       // Query for a movie that has the title 'Back to the Future'
       query = {};
       const universes = await universesCollection.find(query).toArray();
-      // Creating excerpts for each series
+      if (universes.length >= 30) {
       for (let index = 0; index < universes.length; index++) {
         const text = universes[index].description;
         let words = text.split(" ");
         words = words.slice(0, 30);
         const defCourte = words.join(" ") + " ...";
         universes[index].defCourte = defCourte;
-      }
+      }}
       result = universes;
-    } finally {
-      // Ensures that the client will close when you finish/error
-      await client.close();
+    } catch (err) {
+      error = err;
     }
 
     return { error, result };
@@ -52,19 +51,16 @@ const universesDatamapper = {
     let error;
   
     try {
-      await client.connect();
-      const database = client.db("Gundam");
-      const universesCollection = database.collection("universes");
+      const db = dbPool.getDb();
+      const universesCollection = db.collection("universes");
 
       // Query for a movie that has the title 'Back to the Future'
-      query = { _id: new ObjectId(universId) };
-    
+      query = { _id: new ObjectId.createFromHexString(universId) };
       const oneUnivers = await universesCollection.findOne(query);
 
       result = oneUnivers;
-    } finally {
-      // Ensures that the client will close when you finish/error
-      await client.close();
+    } catch (err) {
+      error = err;
     }
 
     return { error, result };
