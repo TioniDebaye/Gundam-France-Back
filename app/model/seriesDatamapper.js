@@ -1,5 +1,5 @@
 const { ObjectId } = require("mongodb");
-const dot = require('mongo-dot-notation');
+const dot = require("mongo-dot-notation");
 const client = require("../service/dbPool");
 const dbPool = require("../service/dbPool");
 
@@ -23,18 +23,16 @@ const seriesDatamapper = {
       // Query for a movie that has the title 'Back to the Future'
       query = {};
       const series = await seriesCollection.find(query).toArray();
-      if (series.length >= 30) {
-      // Creating excerpts for each series
       for (let index = 0; index < series.length; index++) {
         const text = series[index].presentation;
-        
         let words = text.split(" ");
-        words = words.slice(0, 30);
-        const defCourte = words.join(" ") + " ...";
-        series[index].defCourte = defCourte;
-      }}
+        if (words.length > 30) {
+          words = words.slice(0, 30);
+          const defCourte = words.join(" ") + " ...";
+          series[index].defCourte = defCourte;
+        }
+      }
       result = series;
-     
     } catch (err) {
       error = err;
     }
@@ -51,14 +49,14 @@ const seriesDatamapper = {
   async getOneSerie(serieId) {
     let result;
     let error;
-
+    console.log(serieId);
     try {
       const db = dbPool.getDb();
       const seriesCollection = db.collection("series");
 
-      // Query for a movie that has the title 'Back to the Future'
-      query = { _id: new ObjectId.createFromHexString(serieId) };
-      const oneSerie = await seriesCollection.findOne(query);
+      const oneSerie = await seriesCollection.findOne({
+        _id: ObjectId.createFromHexString(serieId),
+      });
 
       result = oneSerie;
     } catch (err) {
@@ -82,10 +80,9 @@ const seriesDatamapper = {
       const db = dbPool.getDb();
       const seriesCollection = db.collection("series");
 
-      // Query for a movie that has the title 'Back to the Future'
-      query = { _id: new ObjectId.createFromHexString(serieId) };
-
-      const oneSerie = await seriesCollection.deleteOne(query);
+      const oneSerie = await seriesCollection.deleteOne({
+        _id: ObjectId.createFromHexString(serieId),
+      });
 
       result = oneSerie;
     } catch (err) {
@@ -109,8 +106,6 @@ const seriesDatamapper = {
       const db = dbPool.getDb();
       const seriesCollection = db.collection("series");
 
-      // Query for a movie that has the title 'Back to the Future'
-
       const oneSerie = await seriesCollection.insertOne(seriesData);
 
       result = oneSerie;
@@ -130,14 +125,17 @@ const seriesDatamapper = {
   async modifyOneSerie(serieId, seriesData) {
     let result;
     let error;
-    
-  
+    console.log(serieId);
+    console.log(seriesData);
+   
     try {
       const db = dbPool.getDb();
       const seriesCollection = db.collection("series");
-      
-      query = { _id: new ObjectId.createFromHexString(serieId) };
-      const oneSerie = await seriesCollection.updateOne(query,{$set: seriesData});
+
+      const oneSerie = await seriesCollection.updateOne(
+        { _id: ObjectId.createFromHexString(serieId) },
+        { $set: seriesData }
+      );
 
       result = oneSerie;
     } catch (err) {

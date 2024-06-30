@@ -25,17 +25,17 @@ const mechasController = {
       // Query for a movie that has the title 'Back to the Future'
       const mechas = await mechasCollection.find({}).toArray();
       
-        // Creating excerpts for each mecha
-        for (let index = 0; index < mechas.length; index++) {
-          const text = mechas[index].history;
-          let words = text.split(" ");
+      for (let index = 0; index < mechas.length; index++) {
+        const text = mechas[index].history;
+        let words = text.split(" ");
+        if (words.length > 30) {
           words = words.slice(0, 30);
           const defCourte = words.join(" ") + " ...";
           mechas[index].defCourte = defCourte;
         }
-      
+      }
+
       result = mechas;
-      
     } catch (err) {
       error = err;
     }
@@ -57,8 +57,9 @@ const mechasController = {
       const db = dbPool.getDb();
       const mechasCollection = db.collection("mechas");
 
-      query = { _id: new ObjectId.createFromHexString(mechaId) };
-      const oneMecha = await mechasCollection.findOne(query);
+      const oneMecha = await mechasCollection.findOne({
+        _id: ObjectId.createFromHexString(mechaId),
+      });
       result = oneMecha;
     } catch (err) {
       error = err;
@@ -81,8 +82,9 @@ const mechasController = {
       const db = dbPool.getDb();
       const mechasCollection = db.collection("mechas");
 
-      query = { _id: new ObjectId.createFromHexString(mechaId) };
-      const oneMecha = await mechasCollection.deleteOne(query);
+      const oneMecha = await mechasCollection.deleteOne({
+        _id: ObjectId.createFromHexString(mechaId),
+      });
       result = oneMecha;
     } catch (err) {
       error = err;
@@ -127,8 +129,10 @@ const mechasController = {
       const db = dbPool.getDb();
       const mechasCollection = db.collection("mechas");
 
-      query = { _id: new ObjectId.createFromHexString(mechaId) };
-      const onemecha = await mechasCollection.updateOne(query, {$set: mechaData});
+      const onemecha = await mechasCollection.updateOne(
+        { _id: ObjectId.createFromHexString(mechaId) },
+        { $set: mechaData }
+      );
       result = onemecha;
     } catch (err) {
       error = err;

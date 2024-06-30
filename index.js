@@ -36,7 +36,7 @@ app.use(router);
 
 dbPool.connectToServer()
     .then(() => {
-        console.log('Connected to MongoDB, Databse Gundam');
+        console.log('Connected to MongoDB, Database Gundam');
     })
     .catch((err) => {
         console.error(err);

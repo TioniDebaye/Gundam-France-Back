@@ -6,7 +6,7 @@ GET http://localhost:3002/gunplas HTTP/1.1
 Content-Type: application/json
 
 ### récupérer un gunpla avec son id
-GET http://localhost:3002/fichegunpla/65ea3cc5cfbe1c7c009866a8 HTTP/1.1
+GET http://localhost:3002/fichegunpla/66255e562c350876b3f3fb91 HTTP/1.1
 Content-Type: application/json
 
 ### créer un gunpla

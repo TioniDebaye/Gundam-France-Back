@@ -15,7 +15,7 @@ const serieController = {
     const { error, result } = await seriesDatamapper.getAllSeries();
 
     if (error) {
-      res.send("aucune serie trouvée");
+      res.status(404).json({message:"aucune série trouvée"});
     } else {
       res.json(result);
     }
@@ -30,11 +30,12 @@ const serieController = {
 
   async getOneSerie(req, res, next) {
     serieId = req.params.id
+    console.log(serieId);
    
     const { error, result } = await seriesDatamapper.getOneSerie(serieId);
 
     if (error) {
-      res.send("aucune serie trouvée");
+      res.status(404).json({message:"aucune série trouvée"});
     } else {
       res.json(result);
     }
@@ -51,7 +52,7 @@ const serieController = {
     const { error, result } = await seriesDatamapper.deleteOneSerie(req.params.id);
 
     if (error) {
-      res.send("aucune serie trouvée");
+      res.status(404).json({message:"aucune série trouvée"});
     } else {
       res.json(result);
     }
@@ -66,14 +67,17 @@ const serieController = {
 
   async createOneSerie(req, res, next) {
     const seriesData = req.body;
-    seriesData.img = req.file.path;
+    if (!req.file) {
+      res.status(404).json({message:"aucune image"});
+    } else {
+    seriesData.img = req.file.path }
     console.log(seriesData);
 
 
     const { error, result } = await seriesDatamapper.createOneSerie(seriesData);
     
     if (error) {
-      res.send("aucune serie trouvée");
+      res.status(404).json({message:"aucune série créé"});
     } else {
       res.json(result);
     }
@@ -88,13 +92,20 @@ const serieController = {
 
   async modifyOneSerie(req, res, next) {
     const seriesData = req.body;
-    seriesData.img = req.file.path;
-    const serieId = req.params.id
+   
+    // if (!req.file) {
+    //   res.status(404).json({message:"aucune image"});
+    // } else {
+    // seriesData.img = req.file.path }
 
+   
+   
+    const serieId = req.params.id
+    console.log(serieId);
     const { error, result } = await seriesDatamapper.modifyOneSerie(serieId, seriesData);
     
     if (error) {
-      res.send("aucune serie trouvée");
+      res.status(404).json({message:"aucune série trouvée"});
     } else {
       res.json(result);
     }
