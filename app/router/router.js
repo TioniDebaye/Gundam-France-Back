@@ -19,8 +19,8 @@ router.get('/app/admin')
 router.get('/series', seriesController.getAllSeries)
 router.get('/ficheserie/:id', seriesController.getOneSerie);
 router.delete('/ficheserie/:id', seriesController.deleteOneSerie)
-router.post('/series/create',  upload.single('img'), seriesController.createOneSerie)
-router.patch('/ficheserie/:id', upload.single('img'),  seriesController.modifyOneSerie)
+router.post('/series/create',  upload.single('imgserie'), seriesController.createOneSerie)
+router.patch('/ficheserie/:id', upload.single('imgserie'),  seriesController.modifyOneSerie)
 
 //route pour afficher les univers
 router.get('/univers', seriesController.getAllSeries)

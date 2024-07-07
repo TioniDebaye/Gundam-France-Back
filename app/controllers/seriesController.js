@@ -93,10 +93,11 @@ const serieController = {
   async modifyOneSerie(req, res, next) {
     const seriesData = req.body;
    
-    // if (!req.file) {
-    //   res.status(404).json({message:"aucune image"});
-    // } else {
-    // seriesData.img = req.file.path }
+    if (!req.file) {
+      res.status(404).json({message:"aucune image"});
+    } else {
+    seriesData.img = req.file.path.replace(/^Public[\\/]/, '').replace(/\\/g, '/');}
+    
 
    
    
