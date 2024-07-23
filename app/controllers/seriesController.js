@@ -1,6 +1,10 @@
 const { log } = require("console");
 const seriesDatamapper = require("../model/seriesDatamapper");
 const path = require('path');
+const createLogger = require("../service/logger");
+const { log } = require("winston");
+const infoLogger = createLogger('./logs/SerieInfo  %DATE%.log', 'info');
+const errorLogger = createLogger('./logs/SerieError  %DATE%.log', 'error');
 
 
 const serieController = {
@@ -16,8 +20,10 @@ const serieController = {
 
     if (error) {
       res.status(404).json({message:"aucune série trouvée"});
+      errorLogger.error(`Aucune Serie trouvée --> ERREUR : ${error}`)
     } else {
       res.json(result);
+      infoLogger.info('Tous les series ont été trouvées')
     }
   },
 
@@ -36,8 +42,10 @@ const serieController = {
 
     if (error) {
       res.status(404).json({message:"aucune série trouvée"});
+      errorLogger.error(`Aucune Série trouvée --> ERREUR : ${error}`)
     } else {
       res.json(result);
+      infoLogger.info(`Serie avec l'id ${serieId} trouvée`)
     }
   },
 
@@ -53,8 +61,10 @@ const serieController = {
 
     if (error) {
       res.status(404).json({message:"aucune série trouvée"});
+      errorLogger.error(`Aucune série avec l'id ${req.params.id}trouvée --> ERREUR : ${error}`)
     } else {
       res.json(result);
+      infoLogger.info(`Série avec l'id ${req.params.id} a été supprimée`)
     }
   },
 
@@ -78,8 +88,10 @@ const serieController = {
     
     if (error) {
       res.status(404).json({message:"aucune série créé"});
+      errorLogger.error(`Série avec les paramètres suivants ${seriesData} n'a pas pu être créé --> ERREUR : ${error}`)
     } else {
       res.json(result);
+      infoLogger.info(`Série avec les informations ${seriesData} a bien été crée`)
     }
   },
 
@@ -95,6 +107,7 @@ const serieController = {
    
     if (!req.file) {
       res.status(404).json({message:"aucune image"});
+      errorLogger.error(`Aucune modification possible pour la série avec les informations suivantes : ${seriesData} --> ERREUR : ${error}`)
     } else {
     seriesData.img = req.file.path.replace(/^Public[\\/]/, '').replace(/\\/g, '/');}
     
@@ -107,8 +120,10 @@ const serieController = {
     
     if (error) {
       res.status(404).json({message:"aucune série trouvée"});
+      errorLogger.error(`Aucune Série avec l'id : ${serieId} trouvée --> ERREUR : ${error}`)
     } else {
       res.json(result);
+      infoLogger.info(`Série avec l'id ${serieId} modifiée`)
     }
   },
   

@@ -18,7 +18,7 @@ const mechasController = {
 
     if (error) {
       res.status(404).json({ message: "aucun mecha trouvé" });
-      errorLogger.error(`Aucune Mecha trouvé --> ERREUR : ${error}`)
+      errorLogger.error(`Aucun Mecha trouvé --> ERREUR : ${error}`)
     } else {
       res.json(result);
       infoLogger.info('Tous les méchas ont été trouvés')
