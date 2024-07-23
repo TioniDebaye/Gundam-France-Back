@@ -5,11 +5,23 @@ const userDatamapper = require("../model/userDatamapper");
 const userController = { 
     async createOneUser (req, res, next) {
         try {
-            // Hacher le mot de passe avant de l'envoyer au datamapper
-            const hashedPassword = await bcrypt.hash(req.body.password, 10);
+            const { email, password, ...otherData } = req.body;
+    
+            // Vérifier si l'email existe déjà
+            const { error: findError, result: existingUser } = await userDatamapper.getOneUser(email);
+            if (findError) {
+                return res.status(500).send('Erreur lors de la vérification de l\'email');
+            }
+            if (existingUser) {
+                return res.status(409).send('Email existe déjà');
+            }
+    
+            // Hacher le mot de passe avant de créer l'utilisateur
+            const hashedPassword = await bcrypt.hash(password, 10);
             const userData = {
-                ...req.body,
-                password: hashedPassword
+                email,
+                password: hashedPassword,
+                ...otherData
             };
     
             const { error, result } = await userDatamapper.createOneUser(userData);

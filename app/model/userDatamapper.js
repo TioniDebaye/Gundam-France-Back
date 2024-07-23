@@ -38,7 +38,9 @@ const userDatamapper = {
             error = err;
         }
         return { error, result };
-    }
+    },
+
+    
 }
 
 module.exports = userDatamapper
