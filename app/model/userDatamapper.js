@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 
 const userDatamapper = {
 
-    createOneUser: async (userData) => {
+    async createOneUser(userData)  {
 
         let error;
         let result;
@@ -23,7 +23,7 @@ const userDatamapper = {
 
     },
 
-    getOneUser: async (email) => {
+    async getOneUser(email) {
         let error;
         let result;
 

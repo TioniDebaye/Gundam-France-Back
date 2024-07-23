@@ -4,6 +4,7 @@ const seriesController = require('../controllers/seriesController')
 const mechasController = require('../controllers/mechasController')
 const gunplasController = require('../controllers/gunplasController')
 const universesController = require('../controllers/universesController')
+const userController = require('../controllers/userController')
 const upload = require('../service/multer')
 
 
@@ -44,4 +45,10 @@ router.patch('/fichegunpla/:id', gunplasController.updateOneGunpla)
 router.get('/universes', universesController.getAllUniverses )
 router.get('/ficheunivers/:id', universesController.getOneUnivers )
 //j'exporte mon module routeur pour que le app.js puisse le lancer
+
+
+router.post('/users', userController.createOneUser);
+router.get('/users/:email', userController.getOneUser);
+router.post('/login', userController.loginUser);
+
 module.exports = router;
