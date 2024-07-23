@@ -1,4 +1,8 @@
 const mechasDatamapper = require("../model/mechasDatamapper");
+const createLogger = require("../service/logger");
+const { log } = require("winston");
+const infoLogger = createLogger('./logs/MechaInfo  %DATE%.log', 'info');
+const errorLogger = createLogger('./logs/MechaError  %DATE%.log', 'error');
 
 
 const mechasController = {
@@ -14,8 +18,10 @@ const mechasController = {
 
     if (error) {
       res.status(404).json({ message: "aucun mecha trouvé" });
+      errorLogger.error(`Aucune Mecha trouvé --> ERREUR : ${error}`)
     } else {
       res.json(result);
+      infoLogger.info('Tous les méchas ont été trouvés')
     }
   },
 
@@ -33,8 +39,10 @@ const mechasController = {
 
     if (error) {
       res.status(404).json({ message: "aucun mecha trouvé" });
+      errorLogger.error(`le mecha avec l'id ${mechaId} n'a pas été trouvé --> ERREUR : ${error}`)
     } else {
       res.json(result);
+      infoLogger.info(`Mecha avec l'id ${mechaId} trouvé`)
     }
   },
 
@@ -54,8 +62,10 @@ const mechasController = {
 
     if (error) {
       res.status(404).json({ message: "aucun mecha trouvé" });
+      errorLogger.error(`le mecha avec l'id ${mechaId} n'a pas été trouvé --> ERREUR : ${error}`)
     } else {
       res.json(result);
+      infoLogger.info(`Mecha avec l'id ${mechaId} a été supprimé`)
     }
   }, 
 
@@ -74,8 +84,10 @@ const mechasController = {
 
     if (error) {
       res.status(404).json({message:"création de la fiche mécha impossible"});
+      errorLogger.error(`Mecha avec les informations suivantes : ${mechaData} n'a pas été crée --> ERREUR : ${error}`)
     } else {
       res.json(result)
+      infoLogger.info(`Mecha avec les informations suivantes : ${mechaData} a bien été créé`)
     }
 
   }, 
@@ -96,8 +108,10 @@ const mechasController = {
 
     if (error) {
       res.status(404).json({message:"modification de la fiche mécha impossible"});
+      errorLogger.error(`Mecha ${mechaId} mis à jour avec les informations suivantes : ${mechaData} n'a pas été mis à jour --> ERREUR : ${error}`)
     } else {
       res.json(result)
+      infoLogger.info(`Mecha ${mechaId} mis à jour avec les informations suivantes : ${mechaData} a bien été créé`)
     }
   }
 };
