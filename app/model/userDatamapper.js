@@ -40,6 +40,23 @@ const userDatamapper = {
         return { error, result };
     },
 
+    async checkUser(email) {
+        let error;
+        let result;
+
+        try {
+            const db = dbPool.getDb();
+            const usersCollection = db.collection("users");
+
+            const oneUser = await usersCollection.findOne({ email });
+
+            result = oneUser;
+        } catch (err) {
+            error = err;
+        }
+        return { error, result };
+    }
+
     
 }
 

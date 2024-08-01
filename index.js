@@ -6,6 +6,8 @@ const router = require('./app/router/router');
 const port = 3002;
 const dbPool = require("./app/service/dbPool");
 const bodyParser = require('body-parser')
+const session = require("express-session");
+require('dotenv').config();
 
 
 const cors= require('cors');
@@ -28,9 +30,18 @@ app.use(cors(
   {
       origin: 'http://localhost:5173',
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-      credentials: true, // You may need this if you're using cookies or sessions 
+      credentials: false, // You may need this if you're using cookies or sessions 
   }
 ));
+
+// Configuration de la session
+app.use(session({
+    secret: 'leclercserachampion',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // Utilise `true` en production avec HTTPS
+}));
+
 //j'indique à express d'utiliser mon fichier routeur
 app.use(router);
 

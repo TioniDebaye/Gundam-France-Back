@@ -9,6 +9,11 @@
             "date": 1721766364142,
             "name": "logs\\MechaError  23-07-2024.log",
             "hash": "0efe3e3be1185d49c6362357cd514adf7fa537a5a0cc96510be1091e2c3094fb"
+        },
+        {
+            "date": 1722539687688,
+            "name": "logs\\MechaError  01-08-2024.log",
+            "hash": "cd3758682ad620312da1526a6806a9644dd7cc42ec42ffe8e860956946f1cd4e"
         }
     ],
     "hashType": "sha256"

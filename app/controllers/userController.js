@@ -1,6 +1,7 @@
 const dbPool = require("../service/dbPool");
 const bcrypt = require("bcrypt");
 const userDatamapper = require("../model/userDatamapper");
+const jwt = require("jsonwebtoken");
 
 const userController = { 
     async createOneUser (req, res, next) {
@@ -57,26 +58,31 @@ const userController = {
         }
     },
 
-    async loginUser(req, res) {
+    async loginUser(req, res, next) {
+        const { user, password } = req.body;
         try {
-            const { email, password } = req.body;
-            const { error, result } = await userDatamapper.getOneUser(email);
-    
+            const { error, result } = await userDatamapper.checkUser(user);
+            
             if (error) {
-                return res.status(500).send('Erreur lors de la récupération de l\'utilisateur');
-            }
-            if (!result) {
-                return res.status(404).send('Utilisateur ou Mot de passe incorrect');
+                return next(error);
             }
     
-            const match = await bcrypt.compare(password, result.password);
-            if (!match) {
-                return res.status(401).send('Email ou Mot de passe incorrect');
-            }
+            if (result && await bcrypt.compare(password, result.password)) {
+                req.session.user = result;
+                delete req.session.user.password;
     
-            res.status(200).send('Accès accordé');
-        } catch (error) {
-            res.status(500).send('Erreur serveur');
+                const token = jwt.sign(
+                    { user: req.session.user },
+                    process.env.JWT_SECRET
+                );
+    
+                return res.status(200).json({"token": token });
+                
+            } else {
+                return res.status(401).json("Email ou mot de passe incorrect");
+            }
+        } catch (err) {
+            next(err);
         }
     }
 }

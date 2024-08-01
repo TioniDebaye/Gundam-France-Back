@@ -9,6 +9,11 @@
             "date": 1721766364133,
             "name": "logs\\MechaInfo  23-07-2024.log",
             "hash": "07b5d7c59997b98f94cc34d80b5790b3d50d425d2be41f32dcc4865bd5436685"
+        },
+        {
+            "date": 1722539687681,
+            "name": "logs\\MechaInfo  01-08-2024.log",
+            "hash": "b35c2cdba5324d3bb12c04acd51ca8f5328d85414a72036296988d4b72f0b431"
         }
     ],
     "hashType": "sha256"

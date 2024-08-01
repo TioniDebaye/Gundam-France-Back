@@ -1,4 +1,4 @@
-const { log } = require("console");
+
 const seriesDatamapper = require("../model/seriesDatamapper");
 const path = require('path');
 const createLogger = require("../service/logger");
